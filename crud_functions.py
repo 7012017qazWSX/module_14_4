@@ -1,8 +1,8 @@
 import sqlite3
 
 def initiate_db(db_name='products.db'):
-    conn = sqlite3.connect(db_name)
-    cursor = conn.cursor()
+    connection = sqlite3.connect(db_name)
+    cursor = connection.cursor()
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Products (
@@ -25,8 +25,9 @@ def initiate_db(db_name='products.db'):
                    (f'{title[2]}', f'{description[2]}', f'{price[2]}'))
     cursor.execute('INSERT INTO Products(title, description, price) VALUES (?, ?, ?)',
                    (f'{title[3]}', f'{description[3]}', f'{price[3]}'))
-    conn.commit()
-    conn.close()
+   
+    connection.commit()
+    connection.close()
 
 def get_all_products(db_name='products.db'):
     conn = sqlite3.connect(db_name)
@@ -35,7 +36,7 @@ def get_all_products(db_name='products.db'):
     cursor.execute('SELECT * FROM Products')
     products = cursor.fetchall()
 
-    conn.close()
+    connection.close()
 
     return products
 
